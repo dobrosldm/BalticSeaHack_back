@@ -21,7 +21,7 @@ public class PlacesController {
         double lng = 30.320915;
         double radius = 500;
 
-        List<Place> places = client.getNearbyPlaces(lat, lng, radius, GooglePlaces.DEFAULT_RESULTS);
+        List<Place> places = client.getPlacesByRadar(lat, lng, radius, GooglePlaces.DEFAULT_RESULTS);
 
         return places;
     }
