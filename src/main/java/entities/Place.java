@@ -1,8 +1,14 @@
 package entities;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "places")
 public class Place {
     private Double lat, lng, rad=3000D;
-    private String id, type="museum";
+    @Id
+    private String id;
+    private String type="museum";
     private String name;
     private Double rating;
     private String address;

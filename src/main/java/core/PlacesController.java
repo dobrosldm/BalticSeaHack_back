@@ -9,12 +9,12 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -24,6 +24,9 @@ import java.util.Random;
 
 @RestController
 public class PlacesController {
+
+    @Autowired
+    private PlacesRepository placesRepository;
 
     private final String API_KEY = "AIzaSyAXtd2wjXVe86zgXu176Z_-TwJ7FPexEpc";
 
@@ -62,5 +65,10 @@ public class PlacesController {
         }
 
         return resultList;
+    }
+
+    @PostMapping(path = "/add")
+    public Place add(@RequestBody Place place) {
+        return placesRepository.save(place);
     }
 }
