@@ -1,8 +1,8 @@
 package entities;
 
 public class Place {
-    private Double lat, lng, rad;
-    private String id, type;
+    private Double lat, lng, rad=3000D;
+    private String id, type="museum";
     private String name;
     private Double rating;
     private String address;

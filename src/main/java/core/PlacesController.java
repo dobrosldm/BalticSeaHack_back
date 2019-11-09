@@ -34,12 +34,6 @@ public class PlacesController {
 
         final URIBuilder builder = new URIBuilder().setScheme("https").setHost("maps.googleapis.com").setPath("/maps/api/place/search/json");
 
-        if (place.getType().isEmpty())
-            place.setType("museum");
-
-        if (place.getRad().isNaN())
-            place.setRad(3000D);
-
         builder.addParameter("location",  place.getLat() + "," + place.getLng());
         builder.addParameter("radius", String.valueOf(place.getRad()));
         builder.addParameter("type", place.getType());
