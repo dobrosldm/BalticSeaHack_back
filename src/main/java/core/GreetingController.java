@@ -14,10 +14,8 @@ public class GreetingController {
     
     @GetMapping(produces = "application/json")
     @ApiOperation(value = "Returns a json of parametrs you've written in url", response = Something.class)
-    public Something greeting(@ApiParam(value = "Name, default - World", required = false)
-        @RequestParam(name="name", required=false, defaultValue="World") String name, 
-        @ApiParam(value = "Id", required = false)
-        @RequestParam(name="id", required=false) Integer id) {
+    public Something greeting(@ApiParam(value = "Name, default - World", required = false) @RequestParam(name="name", required=false, defaultValue="World") String name, 
+                              @ApiParam(value = "Id", required = false) @RequestParam(name="id", required=false) Integer id) {
 
         Something something = new Something();
         something.setId(id);
