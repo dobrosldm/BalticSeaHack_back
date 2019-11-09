@@ -2,7 +2,7 @@ package entities;
 
 public class Place {
     private String name;
-    private String rating;
+    private double rating;
     private String adress;
 
     public String getAdress() {
@@ -21,11 +21,11 @@ public class Place {
         this.name = name;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 }
