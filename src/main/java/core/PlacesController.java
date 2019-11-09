@@ -14,7 +14,7 @@ public class PlacesController {
 
     GooglePlaces client = new GooglePlaces(GOOGLE_API_KEY);
 
-    @GetMapping(path = "/examplePlaces", produces = "application/json")
+    @GetMapping(path = "/examplePlaces")
     public List<Place> examplePlaces() {
         //59.851475, 30.320915
         double lat = 59.851475;
