@@ -14,6 +14,7 @@ public class Place {
     private String address;
     private String open;
     private String close;
+    private String description;
     private String videoUrl;
 
     public String getType() {
@@ -94,6 +95,14 @@ public class Place {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getVideoUrl() {
