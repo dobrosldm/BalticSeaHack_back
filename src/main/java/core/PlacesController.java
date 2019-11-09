@@ -20,15 +20,15 @@ import java.util.ArrayList;
 @RestController
 public class PlacesController {
     
-    // @Autowired
-    // private PlacesRepository placesRepository;
+    @Autowired
+    private PlacesRepository placesRepository;
 
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_SEARCH = "/nearbysearch";
     private static final String OUT_JSON = "/json";
     private static final String API_KEY = "AIzaSyCGeAZDkQz0REaiedemTMVajwLAZe_4wbM";
 
-    @GetMapping(path = "/creatPlace")
+    @GetMapping(path = "/create_place")
     public Place createPlace() {
         Place place = new Place();
         place.setAdress("addr");
@@ -37,7 +37,7 @@ public class PlacesController {
         place.setPlaceId("pl_id");
         place.setRating(5.5);
 
-        // placesRepository.save(place);
+        placesRepository.save(place);
 
         return place;
     }
