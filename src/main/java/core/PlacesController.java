@@ -1,6 +1,7 @@
 package core;
 
-import entities.Place;
+// import entities.Place;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,11 +19,28 @@ import java.util.ArrayList;
 
 @RestController
 public class PlacesController {
+    
+    // @Autowired
+    // private PlacesRepository placesRepository;
 
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_SEARCH = "/nearbysearch";
     private static final String OUT_JSON = "/json";
     private static final String API_KEY = "AIzaSyCGeAZDkQz0REaiedemTMVajwLAZe_4wbM";
+
+    @GetMapping(path = "/creatPlace")
+    public Place createPlace() {
+        Place place = new Place();
+        place.setAdress("addr");
+        place.setDecription("decr");
+        place.setName("name");
+        place.setPlaceId("pl_id");
+        place.setRating(5.5);
+
+        // placesRepository.save(place);
+
+        return place;
+    }
 
     @GetMapping(path = "/examplePlaces")
     public ArrayList<Place> examplePlaces() {
@@ -75,7 +93,7 @@ public class PlacesController {
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 Place place = new Place();
                 place.setName(predsJsonArray.getJSONObject(i).getString("name"));
-                place.setRating(predsJsonArray.getJSONObject(i).getString("rating"));
+                place.setRating(predsJsonArray.getJSONObject(i).getDouble("rating"));
                 place.setAdress(predsJsonArray.getJSONObject(i).getString("vicinity"));
                 resultList.add(place);
             }
