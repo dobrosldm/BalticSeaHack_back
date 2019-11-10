@@ -52,42 +52,53 @@ public class PlacesController {
 
         String videoUrl;
 
+        int index = 0;
+
         switch (place.getFilter()) {
             case "culture":
                 place.setFilter("museum");
                 videoUrl = videoLinks[0];
+                index = 0;
                 break;
             case "food":
                 place.setFilter("restaurant");
                 videoUrl = videoLinks[1];
+                index = 1;
                 break;
             case "learning":
                 place.setFilter("university");
                 videoUrl = videoLinks[2];
+                index = 2;
                 break;
             case "parties":
                 place.setFilter("night_club");
                 videoUrl = videoLinks[3];
+                index = 3;
                 break;
             case "nature":
                 place.setFilter("park");
                 videoUrl = videoLinks[4];
+                index = 4;
                 break;
             case "water":
                 place.setFilter("water");
                 videoUrl = videoLinks[5];
+                index = 5;
                 break;
             case "eco":
                 place.setFilter("eco");
                 videoUrl = videoLinks[6];
+                index = 6;
                 break;
             case "vol":
                 place.setFilter("vol");
                 videoUrl = videoLinks[7];
+                index = 7;
                 break;
             default:
                 place.setFilter("restaurant");
                 videoUrl = videoLinks[0];
+                index = 0;
                 break;
         }
 
@@ -116,7 +127,6 @@ public class PlacesController {
             DecimalFormat df = new DecimalFormat("#.#");
             resultList = new ArrayList<Place>(jsonArray.length());
 
-            int index = 0;
             for (int i = 0; i < jsonArray.length(); i++) {
                 Optional<Place> optional = placesRepository.findById(jsonArray.getJSONObject(i).getString("place_id"));
                 Place tmpPlace;
