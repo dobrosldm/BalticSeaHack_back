@@ -134,16 +134,101 @@ public class PlacesController {
     }
 
     //temporary
-    @GetMapping(path = "/addVolEco")
-    public boolean addVolEco() {
-        Place volPlace = new Place();
-        volPlace.setFilter("vol");
-        Place ecoPlace = new Place();
-        volPlace.setFilter("eco");
-        for (int i = 0; i < 5; i++) {
-            placesRepository.save(volPlace);
-            if (i < 3) placesRepository.save(ecoPlace);
-        }
+    @GetMapping(path = "/addEco")
+    public boolean addEco() {
+        Place eco = new Place();
+        eco.setAddress("г. Пушкин, Фермский Императорский парк");
+        eco.setClose("19:00");
+        eco.setOpen("10:00");
+        eco.setDescription("Цель движения Мусора.Больше.Нет чтобы не было мусора! Чтобы на газонах и во дворах, в парках, лесах, на полях и полянках, на пляжах, на тротуарах, на детских площадках, на спортивных полях, дорогах и пустырях НЕ БЫЛО МУСОРА! Мусор может быть в урнах, мусорных баках, мусорных машинах и на станциях переработки мусора!");
+        eco.setFilter("eco");
+        eco.setLat(59.729262);
+        eco.setLng(30.381110);
+        eco.setName("Мусора. Больше. Нет.");
+        eco.setRating(4.7);
+        eco.setVideoUrl("https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4");
+        placesRepository.save(eco);
+
+        eco.setAddress("ул. Рылеева, 17-19 лит.А");
+        eco.setClose("18:30");
+        eco.setOpen("10:00");
+        eco.setDescription("Greenpeace - это общественная неправительственная и некоммерческая экологическая организация. Она объединяет людей, живущих на разных континентах, с различным цветом кожи, говорящих на множестве языков озабоченных проблемой защиты окружающей среды.");
+        eco.setFilter("eco");
+        eco.setLat(59.942325);
+        eco.setLng(30.356412);
+        eco.setName("Гринпис. Санкт-Петербург.");
+        eco.setRating(4.3);
+        eco.setVideoUrl("https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4");
+        placesRepository.save(eco);
+
+        eco.setAddress("3-я лин. В. О., 2");
+        eco.setClose("18:00");
+        eco.setOpen("10:00");
+        eco.setDescription("Зеленый Крест является инициатором и организатором ежегодного конкурса для экологических журналистов «Экостиль». Одно из направлений нашей деятельности — проведение пресс-туров по наиболее интересным местам Ленинградской области, памятникам истории и культуры. Зеленый Крест принимает участие в деятельности Общественной Палаты Ленинградской области, Общественного экологического Совета при Губернаторе Ленинградской области, Общественного Совета по охране окружающей среды при Правительстве Санкт–Петербурга");
+        eco.setFilter("eco");
+        eco.setLat(59.939492);
+        eco.setLng(30.288688);
+        eco.setName("Зелёный крест");
+        eco.setRating(4.5);
+        eco.setVideoUrl("https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4");
+        placesRepository.save(eco);
+
+        return true;
+    }
+
+    @GetMapping(path = "/addVol")
+    public boolean addVol() {
+        String videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+        Place eco = new Place();
+        eco.setAddress("Санкт-Петербург, Приморский пр., 33");
+        eco.setClose("19:00");
+        eco.setOpen("10:00");
+        eco.setDescription("ЭвриЧайлд - это международная благотворительная организация, которая оказывает помощь социально незащищенным детям в 15 странах мира. В России работает с 1994 года. Цель - снижение количества детей, попадающих в сиротские учреждения, и повышение числа детей, размещаемых из этих учреждений в семью.");
+        eco.setFilter("vol");
+        eco.setLat(59.983903);
+        eco.setLng(30.284728);
+        eco.setName("ЭвриЧайлд");
+        eco.setRating(5.0);
+        eco.setVideoUrl(videoUrl);
+        placesRepository.save(eco);
+
+        Place eco1 = new Place();
+        eco1.setAddress("Миллионная ул., 11");
+        eco1.setClose("18:00");
+        eco1.setOpen("10:00");
+        eco1.setDescription("Кратко о деятельности-помощь нуждающимся в независимости от расовых этнических различий. Донорство, профилактика ВИЧ инфекции, обучение первой помощи, помощь детям.");
+        eco1.setFilter("vol");
+        eco1.setLat(59.944122);
+        eco1.setLng(30.324616);
+        eco1.setName("Российский Красный Крест");
+        eco1.setRating(4.2);
+        eco1.setVideoUrl(videoUrl);
+        placesRepository.save(eco1);
+
+        eco1.setAddress("ул. Оружейника Фёдорова, 2");
+        eco1.setClose("20:00");
+        eco1.setOpen("12:00");
+        eco1.setDescription("Теплый дом-Благотворительный фонд помощи детям «Тёплый дом» работает с семьями группы риска. Как правило, у таких семей целый комплекс проблем – социальных, психологических, материальных. В неблагополучных семьях дети не всегда получают должное внимание от родителей, пропускают занятия в школе, подвергаются риску насилия, плохо питаются. Условия проживания детей в этих семьях в ряде случаев является неудовлетворительным – и существует риск изъятия детей из семьи.");
+        eco1.setFilter("vol");
+        eco1.setLat(59.945830);
+        eco1.setLng(30.339726);
+        eco1.setName("Тёплый дом");
+        eco1.setRating(4.5);
+        eco1.setVideoUrl(videoUrl);
+        placesRepository.save(eco1);
+
+        eco1.setAddress("13-я лин. В.О, 22 В");
+        eco1.setClose("18:00");
+        eco1.setOpen("10:00");
+        eco1.setDescription("Центр городских волонтеров Санкт-Петербурга – это структура Комитета по молодежной политике и взаимодействию с общественными организациями и ГБУ «Дом Молодежи Санкт-Петербурга», целью которой является создание и поддержание эффективной системы просвещения, отбора и подготовки (обучения) волонтеров для качественного проведения мероприятий любого уровня. Открыт как программа наследия Центра подготовки городских волонтеров Кубка Конфедераций FIFA 2017 и Чемпионата мира по футболу FIFA 2018™ города-организатора Санкт-Петербург согласно протоколу заседания организационного комитета по проведению в Санкт-Петербурге Года добровольца (волонтера).");
+        eco1.setFilter("vol");
+        eco1.setLat(59.938613);
+        eco1.setLng(30.272274);
+        eco1.setName("Центр городских волонтеров Санкт-Петербурга");
+        eco1.setRating(4.5);
+        eco1.setVideoUrl(videoUrl);
+        placesRepository.save(eco1);
+
         return true;
     }
 }
