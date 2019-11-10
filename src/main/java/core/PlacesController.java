@@ -32,17 +32,17 @@ public class PlacesController {
 
     private final HttpClient client = new DefaultHttpClient();
     private String[] videoLinks = {
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380946/culture_pdpso8.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573384423/food_jr19w9.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573384401/university_n2oc3q.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385407/parties_upgbt7.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_476,w_382,y_81/v1573380946/culture_pdpso8.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_975,w_487/v1573384423/food_jr19w9.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_686,w_500/v1573384401/university_n2oc3q.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_988,w_942/v1573385407/parties_upgbt7.mp4",
         "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380979/nature_ernlvz.mp4",
         "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380999/water_z5miet.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380955/eco_bxovqb.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380988/vol_vvy4yf.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_612,w_381,y_98/v1573380955/eco_bxovqb.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_963,w_613/v1573380988/vol_vvy4yf.mp4",
 
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385415/hermitage_s8ryhr.mp4",
-        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385415/erarta_uhmzki.mp4",    
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_879,w_555/v1573385415/hermitage_s8ryhr.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/c_crop,g_north,h_756,w_519/v1573385415/erarta_uhmzki.mp4",    
     };
     private Random r = new Random();
 
