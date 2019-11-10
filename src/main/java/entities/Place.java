@@ -8,7 +8,7 @@ public class Place {
     private Double lat, lng, rad=3000D;
     @Id
     private String id;
-    private String type="museum";
+    private String filter="museum";
     private String name;
     private Double rating;
     private String address;
@@ -17,12 +17,12 @@ public class Place {
     private String description;
     private String videoUrl;
 
-    public String getType() {
-        return type;
+    public String getFilter() {
+        return filter;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setFilter(String filter) {
+        this.filter = filter;
     }
 
     public Double getRad() {

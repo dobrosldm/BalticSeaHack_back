@@ -18,9 +18,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.net.URISyntaxException;
 import java.util.Random;
-
 
 @RestController
 public class PlacesController {
@@ -35,11 +35,52 @@ public class PlacesController {
     @PostMapping(path = "/places")
     public ArrayList<Place> getPlaces(@RequestBody Place place) throws ParseException, IOException, URISyntaxException {
 
+        String videoUrl;
+
+        switch (place.getFilter()) {
+            case "culture":
+                place.setFilter("museum");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "food":
+                place.setFilter("restaurant");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "learning":
+                place.setFilter("university");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "parties":
+                place.setFilter("night_club");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "nature":
+                place.setFilter("park");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "water":
+                place.setFilter("aquarium");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "sport":
+                place.setFilter("gym");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            case "zoo":
+                place.setFilter("zoo");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+            default:
+                place.setFilter("restaurant, meal_takeaway");
+                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                break;
+        }
+
         final URIBuilder builder = new URIBuilder().setScheme("https").setHost("maps.googleapis.com").setPath("/maps/api/place/search/json");
 
         builder.addParameter("location",  place.getLat() + "," + place.getLng());
         builder.addParameter("radius", String.valueOf(place.getRad()));
-        builder.addParameter("type", place.getType());
+        builder.addParameter("types", place.getFilter());
         builder.addParameter("key", API_KEY);
 
         HttpUriRequest request = new HttpGet(builder.build());
@@ -54,13 +95,24 @@ public class PlacesController {
         resultList = new ArrayList<Place>(jsonArray.length());
 
         for (int i = 0; i < jsonArray.length(); i++) {
-            Place tmpPlace = new Place();
-            tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
-            tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
-            tmpPlace.setRating(Double.parseDouble(df.format(3D + (5D - 3D) * r.nextDouble())));
-            tmpPlace.setAddress(jsonArray.getJSONObject(i).getString("vicinity"));
-            tmpPlace.setClose((r.nextInt((21 - 17) + 1) + 17) +":00");
-            tmpPlace.setOpen((r.nextInt((11 - 7) + 1) + 7) +":00");
+            Optional<Place> optional = placesRepository.findById(jsonArray.getJSONObject(i).getString("place_id"));
+            Place tmpPlace;
+            if (optional.isPresent()) {
+                tmpPlace = optional.get();
+            } else {
+                tmpPlace = new Place();
+                tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
+                tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
+                tmpPlace.setRating(Double.parseDouble(df.format(3D + (5D - 3D) * r.nextDouble())));
+                tmpPlace.setAddress(jsonArray.getJSONObject(i).getString("vicinity"));
+                tmpPlace.setClose((r.nextInt((21 - 17) + 1) + 17) +":00");
+                tmpPlace.setOpen((r.nextInt((11 - 7) + 1) + 7) +":00");
+                tmpPlace.setDescription("Some description here");
+                tmpPlace.setVideoUrl(videoUrl);
+                tmpPlace.setFilter(place.getFilter());
+
+                placesRepository.save(tmpPlace);
+            }
             resultList.add(tmpPlace);
         }
 
