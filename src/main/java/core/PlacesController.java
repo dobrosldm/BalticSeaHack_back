@@ -71,7 +71,7 @@ public class PlacesController {
                 videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
                 break;
             default:
-                place.setFilter("restaurant, meal_takeaway");
+                place.setFilter("restaurant");
                 videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
                 break;
         }
@@ -102,6 +102,8 @@ public class PlacesController {
             } else {
                 tmpPlace = new Place();
                 tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
+                tmpPlace.setLat(place.getLat());
+                tmpPlace.setLng(place.getLng());
                 tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
                 tmpPlace.setRating(Double.parseDouble(df.format(3D + (5D - 3D) * r.nextDouble())));
                 tmpPlace.setAddress(jsonArray.getJSONObject(i).getString("vicinity"));
