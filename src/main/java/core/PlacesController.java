@@ -108,8 +108,10 @@ public class PlacesController {
                 } else {
                     tmpPlace = new Place();
                     tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
-                    tmpPlace.setLat(place.getLat());
-                    tmpPlace.setLng(place.getLng());
+                    //tmpPlace.setLat(place.getLat());
+                    tmpPlace.setLat(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
+                    //tmpPlace.setLng(place.getLng());
+                    tmpPlace.setLng(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
                     tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
                     tmpPlace.setRating(Double.parseDouble(df.format(3D + (5D - 3D) * r.nextDouble())));
                     tmpPlace.setAddress(jsonArray.getJSONObject(i).getString("vicinity"));
@@ -131,19 +133,5 @@ public class PlacesController {
     @PostMapping(path = "/add")
     public Place add(@RequestBody Place place) {
         return placesRepository.save(place);
-    }
-
-    //temporary
-    @GetMapping(path = "/addVolEco")
-    public boolean addVolEco() {
-        Place volPlace = new Place();
-        volPlace.setFilter("vol");
-        Place ecoPlace = new Place();
-        volPlace.setFilter("eco");
-        for (int i = 0; i < 5; i++) {
-            placesRepository.save(volPlace);
-            if (i < 3) placesRepository.save(ecoPlace);
-        }
-        return true;
     }
 }
