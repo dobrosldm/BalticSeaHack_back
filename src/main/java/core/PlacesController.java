@@ -144,12 +144,17 @@ public class PlacesController {
                     tmpPlace.setClose((r.nextInt((21 - 17) + 1) + 17) +":00");
                     tmpPlace.setOpen((r.nextInt((11 - 7) + 1) + 7) +":00");
                     tmpPlace.setDescription(addDesc(place.getFilter()));
-                    tmpPlace.setVideoUrl(videoLinks[index++]);
+                    tmpPlace.setVideoUrl(videoUrl);
                     tmpPlace.setFilter(place.getFilter());
     
                     placesRepository.save(tmpPlace);
                 }
                 resultList.add(tmpPlace);
+            }
+            for (int j = 0; j < resultList.size(); j++) {
+                if (j % 3 == 0) resultList.get(j).setVideoUrl(videoLinks[0]);
+                else if (j % 3 == 1) resultList.get(j).setVideoUrl(videoLinks[8]);
+                else if (j % 3 == 2) resultList.get(j).setVideoUrl(videoLinks[9]);
             }
         }
 
@@ -231,7 +236,6 @@ public class PlacesController {
         water.setVideoUrl(videoUrl);
         placesRepository.save(water);
         
-        videoUrl = videoLinks[6];
         Place water1 = new Place();
         water1.setAddress("Комарово, Санкт-Петербург");
         water1.setClose("22:00");
@@ -247,7 +251,6 @@ public class PlacesController {
         water1.setVideoUrl(videoUrl);
         placesRepository.save(water1);
 
-        videoUrl = videoLinks[7];
         Place water2 = new Place();
         water2.setAddress("оз. Щучье, Санкт-Петербург");
         water2.setClose("24:00");
@@ -263,7 +266,6 @@ public class PlacesController {
         water2.setVideoUrl(videoUrl);
         placesRepository.save(water2);
 
-        videoUrl = videoLinks[8];
         Place water3 = new Place();
         water3.setAddress("Московский пр. д.150, к.2, Бассейн \"Волна\"");
         water3.setOpen("08:00");
@@ -279,7 +281,6 @@ public class PlacesController {
         water3.setVideoUrl(videoUrl);
         placesRepository.save(water3);
 
-        videoUrl = videoLinks[9];
         Place water4 = new Place();
         water4.setAddress("Береговая ул., 19, лит. А");
         water4.setOpen("07:00");
@@ -296,7 +297,6 @@ public class PlacesController {
         water4.setVideoUrl(videoUrl);
         placesRepository.save(water4);
 
-        videoUrl = videoLinks[0];
         Place water5 = new Place();
         water5.setAddress("Рощинское оз., Санкт-Петербург");
         water5.setOpen("00:00");
@@ -310,7 +310,6 @@ public class PlacesController {
         water5.setVideoUrl(videoUrl);
         placesRepository.save(water5);
 
-        videoUrl = videoLinks[1];
         Place water6 = new Place();
         water6.setAddress("Приморский пр., 72");
         water6.setOpen("10:00");
@@ -327,7 +326,6 @@ public class PlacesController {
         water6.setVideoUrl(videoUrl);
         placesRepository.save(water6);
 
-        videoUrl = videoLinks[2];
         Place water7 = new Place();
         water7.setAddress("улица Фучика, 10 к.2");
         water7.setOpen("18:00");
@@ -365,7 +363,6 @@ public class PlacesController {
         eco.setVideoUrl(videoUrl);
         placesRepository.save(eco);
 
-        videoUrl = videoLinks[7];
         Place eco1 = new Place();
         eco1.setAddress("ул. Рылеева, 17-19 лит.А");
         eco1.setClose("18:30");
@@ -379,7 +376,6 @@ public class PlacesController {
         eco1.setVideoUrl(videoUrl);
         placesRepository.save(eco1);
 
-        videoUrl = videoLinks[8];
         Place eco2 = new Place();
         eco2.setAddress("3-я лин. В. О., 2");
         eco2.setClose("18:00");
@@ -412,7 +408,6 @@ public class PlacesController {
         eco.setVideoUrl(videoUrl);
         placesRepository.save(eco);
 
-        videoUrl = videoLinks[8];
         Place eco1 = new Place();
         eco1.setAddress("Миллионная ул., 11");
         eco1.setClose("18:00");
@@ -426,7 +421,6 @@ public class PlacesController {
         eco1.setVideoUrl(videoUrl);
         placesRepository.save(eco1);
 
-        videoUrl = videoLinks[9];
         Place eco2 = new Place();
         eco2.setAddress("ул. Оружейника Фёдорова, 2");
         eco2.setClose("20:00");
@@ -440,7 +434,6 @@ public class PlacesController {
         eco2.setVideoUrl(videoUrl);
         placesRepository.save(eco2);
         
-        videoUrl = videoLinks[0];
         Place eco3 = new Place();
         eco3.setAddress("13-я лин. В.О, 22 В");
         eco3.setClose("18:00");
