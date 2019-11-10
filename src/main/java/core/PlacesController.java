@@ -31,6 +31,19 @@ public class PlacesController {
     private final String API_KEY = "AIzaSyAXtd2wjXVe86zgXu176Z_-TwJ7FPexEpc";
 
     private final HttpClient client = new DefaultHttpClient();
+    private String[] videoLinks = {
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380946/culture_pdpso8.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573384423/food_jr19w9.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573384401/university_n2oc3q.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385407/parties_upgbt7.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380979/nature_ernlvz.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380999/water_z5miet.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380955/eco_bxovqb.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573380988/vol_vvy4yf.mp4",
+
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385415/hermitage_s8ryhr.mp4",
+        "https://res.cloudinary.com/deyh0dll3/video/upload/v1573385415/erarta_uhmzki.mp4",    
+    };
     private Random r = new Random();
 
 
@@ -42,39 +55,39 @@ public class PlacesController {
         switch (place.getFilter()) {
             case "culture":
                 place.setFilter("museum");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[0];
                 break;
             case "food":
                 place.setFilter("restaurant");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[1];
                 break;
             case "learning":
                 place.setFilter("university");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[2];
                 break;
             case "parties":
                 place.setFilter("night_club");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[3];
                 break;
             case "nature":
                 place.setFilter("park");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[4];
                 break;
             case "water":
                 place.setFilter("water");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[5];
                 break;
             case "eco":
                 place.setFilter("eco");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[6];
                 break;
             case "vol":
                 place.setFilter("vol");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[7];
                 break;
             default:
                 place.setFilter("restaurant");
-                videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+                videoUrl = videoLinks[0];
                 break;
         }
 
@@ -103,12 +116,14 @@ public class PlacesController {
             DecimalFormat df = new DecimalFormat("#.#");
             resultList = new ArrayList<Place>(jsonArray.length());
 
+            int index = 0;
             for (int i = 0; i < jsonArray.length(); i++) {
                 Optional<Place> optional = placesRepository.findById(jsonArray.getJSONObject(i).getString("place_id"));
                 Place tmpPlace;
                 if (optional.isPresent()) {
                     tmpPlace = optional.get();
                 } else {
+                    if (index == 10) index = 0;
                     tmpPlace = new Place();
                     tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
                     tmpPlace.setLat(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
@@ -119,7 +134,7 @@ public class PlacesController {
                     tmpPlace.setClose((r.nextInt((21 - 17) + 1) + 17) +":00");
                     tmpPlace.setOpen((r.nextInt((11 - 7) + 1) + 7) +":00");
                     tmpPlace.setDescription(addDesc(place.getFilter()));
-                    tmpPlace.setVideoUrl(videoUrl);
+                    tmpPlace.setVideoUrl(videoLinks[index++]);
                     tmpPlace.setFilter(place.getFilter());
     
                     placesRepository.save(tmpPlace);
@@ -190,7 +205,7 @@ public class PlacesController {
 
     @GetMapping(path = "/addWater")
     public boolean addWater() {
-        String videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+        String videoUrl = videoLinks[5];
         Place water = new Place();
         water.setAddress("Комарово, Санкт-Петербург");
         water.setClose("24:00");
@@ -206,6 +221,7 @@ public class PlacesController {
         water.setVideoUrl(videoUrl);
         placesRepository.save(water);
         
+        videoUrl = videoLinks[6];
         Place water1 = new Place();
         water1.setAddress("Комарово, Санкт-Петербург");
         water1.setClose("22:00");
@@ -221,6 +237,7 @@ public class PlacesController {
         water1.setVideoUrl(videoUrl);
         placesRepository.save(water1);
 
+        videoUrl = videoLinks[7];
         Place water2 = new Place();
         water2.setAddress("оз. Щучье, Санкт-Петербург");
         water2.setClose("24:00");
@@ -236,6 +253,7 @@ public class PlacesController {
         water2.setVideoUrl(videoUrl);
         placesRepository.save(water2);
 
+        videoUrl = videoLinks[8];
         Place water3 = new Place();
         water3.setAddress("Московский пр. д.150, к.2, Бассейн \"Волна\"");
         water3.setOpen("08:00");
@@ -251,6 +269,7 @@ public class PlacesController {
         water3.setVideoUrl(videoUrl);
         placesRepository.save(water3);
 
+        videoUrl = videoLinks[9];
         Place water4 = new Place();
         water4.setAddress("Береговая ул., 19, лит. А");
         water4.setOpen("07:00");
@@ -267,6 +286,7 @@ public class PlacesController {
         water4.setVideoUrl(videoUrl);
         placesRepository.save(water4);
 
+        videoUrl = videoLinks[0];
         Place water5 = new Place();
         water5.setAddress("Рощинское оз., Санкт-Петербург");
         water5.setOpen("00:00");
@@ -280,6 +300,7 @@ public class PlacesController {
         water5.setVideoUrl(videoUrl);
         placesRepository.save(water5);
 
+        videoUrl = videoLinks[1];
         Place water6 = new Place();
         water6.setAddress("Приморский пр., 72");
         water6.setOpen("10:00");
@@ -296,6 +317,7 @@ public class PlacesController {
         water6.setVideoUrl(videoUrl);
         placesRepository.save(water6);
 
+        videoUrl = videoLinks[2];
         Place water7 = new Place();
         water7.setAddress("улица Фучика, 10 к.2");
         water7.setOpen("18:00");
@@ -319,7 +341,7 @@ public class PlacesController {
 
     @GetMapping(path = "/addEco")
     public boolean addEco() {
-        String videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+        String videoUrl = videoLinks[6];
         Place eco = new Place();
         eco.setAddress("г. Пушкин, Фермский Императорский парк");
         eco.setClose("19:00");
@@ -333,6 +355,7 @@ public class PlacesController {
         eco.setVideoUrl(videoUrl);
         placesRepository.save(eco);
 
+        videoUrl = videoLinks[7];
         Place eco1 = new Place();
         eco1.setAddress("ул. Рылеева, 17-19 лит.А");
         eco1.setClose("18:30");
@@ -346,6 +369,7 @@ public class PlacesController {
         eco1.setVideoUrl(videoUrl);
         placesRepository.save(eco1);
 
+        videoUrl = videoLinks[8];
         Place eco2 = new Place();
         eco2.setAddress("3-я лин. В. О., 2");
         eco2.setClose("18:00");
@@ -364,7 +388,7 @@ public class PlacesController {
 
     @GetMapping(path = "/addVol")
     public boolean addVol() {
-        String videoUrl = "https://res.cloudinary.com/deyh0dll3/video/upload/v1573342642/ChIJ52xnOQAwlkYRv4Z1NFTueqM_qkqruw.mp4";
+        String videoUrl = videoLinks[7];
         Place eco = new Place();
         eco.setAddress("Санкт-Петербург, Приморский пр., 33");
         eco.setClose("19:00");
@@ -378,6 +402,7 @@ public class PlacesController {
         eco.setVideoUrl(videoUrl);
         placesRepository.save(eco);
 
+        videoUrl = videoLinks[8];
         Place eco1 = new Place();
         eco1.setAddress("Миллионная ул., 11");
         eco1.setClose("18:00");
@@ -391,6 +416,7 @@ public class PlacesController {
         eco1.setVideoUrl(videoUrl);
         placesRepository.save(eco1);
 
+        videoUrl = videoLinks[9];
         Place eco2 = new Place();
         eco2.setAddress("ул. Оружейника Фёдорова, 2");
         eco2.setClose("20:00");
@@ -404,6 +430,7 @@ public class PlacesController {
         eco2.setVideoUrl(videoUrl);
         placesRepository.save(eco2);
         
+        videoUrl = videoLinks[0];
         Place eco3 = new Place();
         eco3.setAddress("13-я лин. В.О, 22 В");
         eco3.setClose("18:00");
