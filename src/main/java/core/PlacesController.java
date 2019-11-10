@@ -110,6 +110,7 @@ public class PlacesController {
                     tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
                     //tmpPlace.setLat(place.getLat());
                     tmpPlace.setLat(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
+                    System.out.println(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
                     //tmpPlace.setLng(place.getLng());
                     tmpPlace.setLng(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
                     tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
