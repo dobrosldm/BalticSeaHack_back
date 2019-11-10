@@ -5,10 +5,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "places")
 public class Place {
-    private Double lat, lng, rad=3000D;
+    private Double lat, lng, rad=25000D;
     @Id
     private String id;
-    private String filter="museum";
+    private String filter;
     private String name;
     private Double rating;
     private String address;
