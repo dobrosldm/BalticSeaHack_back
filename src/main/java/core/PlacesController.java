@@ -108,8 +108,8 @@ public class PlacesController {
                 } else {
                     tmpPlace = new Place();
                     tmpPlace.setName(jsonArray.getJSONObject(i).getString("name"));
-                    tmpPlace.setLat(place.getLat());
-                    tmpPlace.setLng(place.getLng());
+                    tmpPlace.setLat(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
+                    tmpPlace.setLng(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
                     tmpPlace.setId(jsonArray.getJSONObject(i).getString("place_id"));
                     tmpPlace.setRating(Double.parseDouble(df.format(3D + (5D - 3D) * r.nextDouble())));
                     tmpPlace.setAddress(jsonArray.getJSONObject(i).getString("vicinity"));
